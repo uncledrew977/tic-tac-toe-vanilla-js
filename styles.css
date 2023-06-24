@@ -37,5 +37,5 @@ body {
     background: white;
     left: calc(var(--x) * 100px + 14px);
     top: calc(var(--y) * 100px + 14px);
-    transition: 800ms ease-in-out;
+    transition: 500ms ease-in-out;
 }

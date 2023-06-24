@@ -32,8 +32,6 @@ export default class Grid {
         }
 
     }
-
-
 }
 
 function createGameBoard(gridElement) {

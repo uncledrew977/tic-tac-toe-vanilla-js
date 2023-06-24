@@ -44,4 +44,10 @@ export default class GamePiece {
     remove() {
         this.#gamePieceElement.remove();
     }
+
+    waitForTransitionEnd() {
+        return new Promise((resolve) => {
+            this.#gamePieceElement.addEventListener("transitionend",resolve,{once: true})
+        })
+    }
 }
