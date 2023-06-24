@@ -21,7 +21,6 @@ function handleClick(e) {
    newPiece.y = 0;
    setTimeout(() => {
       nextEmptyCell.gamePiece = newPiece;
-      console.log(nextEmptyCell.y);
    },1)
 
    playerTurnColor = playerTurnColor === "blue" ? "red" : "blue";
