@@ -1,0 +1,41 @@
+body {
+    height: 100vh;
+    background-color: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+#game-board {
+    display: grid;
+    background-color: dodgerblue;
+    height: 85vmin;
+    width: 100vmin;
+    grid-template-columns: Repeat(7, 1fr);
+    grid-template-rows: Repeat(6, 1fr);
+    grid-gap: 2vmin;
+    padding: 2vmin;
+    position: relative;
+}
+
+.game-cell {
+    background-color: lightgrey;
+    outline: solid 2px black;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-piece {
+    --x: 0;
+    --y: 0;
+    border-radius: 100%;
+    position: absolute;
+    height: 87px;
+    width: 87px;
+    background: white;
+    left: calc(var(--x) * 100px + 14px);
+    top: calc(var(--y) * 100px + 14px);
+    transition: 800ms ease-in-out;
+}
