@@ -7,7 +7,7 @@ import GamePiece from "./GamePiece.js";
 let gameBoardElement = document.getElementById("game-board");
 const grid = new Grid(gameBoardElement);
 
-let playerTurnColor = "blue";
+let playerTurnColor = "red";
 
 gameBoardElement.addEventListener("click", handlePieceDrop, {once: true});
 
@@ -24,8 +24,12 @@ async function handlePieceDrop(e) {
       },1)
       await newPiece.waitForTransitionEnd();
    }
-   gameBoardElement.addEventListener("click", handlePieceDrop, {once: true});
-   playerTurnColor = playerTurnColor === "blue" ? "red" : "blue";
+   if(!grid.gameOver()) {
+      gameBoardElement.addEventListener("click", handlePieceDrop, {once: true});
+      playerTurnColor = playerTurnColor === "red" ? "blue" : "red";
+   } else {
+      alert(`Player ${playerTurnColor === "red" ? "one" : "two"} (${playerTurnColor}) wins!`)
+   }
 
 
 }

@@ -17,6 +17,22 @@ export default class Grid {
         }).reverse();
     }
 
+    #getCellsByRow() {
+        return this.#cells.reduce((rows,cell) => {
+            rows[cell.y] = rows[cell.y] || [];
+            rows[cell.y][cell.x] = cell;
+            return rows;
+        },[])
+    }
+
+    #getCellsByColumns() {
+        return this.#cells.reduce((columns,cell) => {
+            columns[cell.x] = columns[cell.x] || [];
+            columns[cell.x][cell.y] = cell;
+            return columns;
+        },[])
+    }
+
     canPlacePieceInRow(columnNumber) {
         return this.#getAllCellsInAColumn(columnNumber).some((cell) => {
             return cell.gamePiece == null
@@ -32,7 +48,49 @@ export default class Grid {
         }
 
     }
+
+    gameOver() {
+        if(this.checkForHorizontalWin() || this.checkForVerticalWin() || this.checkForDiagonalWin()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    checkForHorizontalWin() {
+        let didWin = false;
+        this.#getCellsByRow().forEach((row) => {
+            for(let i = 0; i < row.length; i++) {
+                let gamePieceOne = row[i].gamePiece;
+                if(gamePieceOne == null) continue;
+                let count = 1;
+                for(let j = i + 1; j < row.length; j++) {
+                    let gamePieceTwo = row[j].gamePiece;
+                    if(gamePieceTwo == null) break;
+                    else if(gamePieceOne.color === gamePieceTwo.color) {
+                        count++;
+                        if(count === 4) {
+                            console.log("WINNER")
+                            didWin = true;
+                        }
+                    }
+                    else break;
+                }
+            }
+        })
+        return didWin;
+    }
+
+    checkForVerticalWin() {
+
+    }
+
+    checkForDiagonalWin() {
+
+    }
 }
+
 
 function createGameBoard(gridElement) {
     let cellElements = [];
