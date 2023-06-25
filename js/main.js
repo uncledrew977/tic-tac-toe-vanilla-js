@@ -2,7 +2,6 @@ import Grid from "./Grid.js";
 import GamePiece from "./GamePiece.js";
 
 //TODO: Fix css positioning styling (x and y) maybe by making the piece so big that it doesn't really matter the position, just make it behind blue background.
-//TODO: Implement check for Win
 
 let gameBoardElement = document.getElementById("game-board");
 const grid = new Grid(gameBoardElement);
