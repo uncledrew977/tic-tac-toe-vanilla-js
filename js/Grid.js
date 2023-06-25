@@ -1,4 +1,7 @@
 import Cell from "./Cell.js"
+
+const MAX_X = 6;
+const MAX_Y = 5;
 export default class Grid {
     #cells
     constructor(gridElement) {
@@ -7,9 +10,6 @@ export default class Grid {
         })
     }
 
-    get cells() {
-        return this.#cells;
-    }
     //This function serves to get all cells in a column in reverse order, so we can search in a top-bottom fashion.
     #getAllCellsInAColumn(columnNumber) {
         return [...this.#cells].filter((cell) => {
@@ -50,15 +50,11 @@ export default class Grid {
     }
 
     gameOver() {
-        if(this.#checkForWin(this.#getCellsByRow()) || this.#checkForWin(this.#getCellsByColumns()) || this.checkForDiagonalWin()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.#checkForStraightWin(this.#getCellsByRow()) || this.#checkForStraightWin(this.#getCellsByColumns()) || this.#checkForDiagonalWin(this.#getCellsByColumns())
 
     }
 
-    #checkForWin(cells) {
+    #checkForStraightWin(cells) {
         let didWin = false;
         cells.forEach((row) => {
             for(let i = 0; i < row.length; i++) {
@@ -71,7 +67,6 @@ export default class Grid {
                     else if(gamePieceOne.color === gamePieceTwo.color) {
                         count++;
                         if(count === 4) {
-                            console.log("WINNER")
                             didWin = true;
                         }
                     }
@@ -82,8 +77,36 @@ export default class Grid {
         return didWin;
     }
 
-    checkForDiagonalWin() {
+    #checkForDiagonalWin(cells) {
+        let didWin = false;
+        cells.forEach((row) => {
+            for(let i = 0; i < row.length; i++) {
+                let cell = row[i];
+                let gamePieceOne = cell.gamePiece;
+                if(gamePieceOne == null) continue;
+                let nextX = cell.x + 1;
+                let nextY = cell.y + 1;
+                let count = 1;
+                while(nextX <= MAX_X && nextY <= MAX_Y) {
+                    let gamePieceTwo = cells[nextX][nextY].gamePiece
+                    if(gamePieceTwo == null) break;
+                    if(gamePieceTwo.color === gamePieceOne.color){
+                        count++;
+                        console.log("MATCH!")
+                        if(count === 4) {
+                            didWin = true;
+                            break;
+                        }
+                        nextX++;
+                        nextY++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        })
 
+        return didWin;
     }
 }
 

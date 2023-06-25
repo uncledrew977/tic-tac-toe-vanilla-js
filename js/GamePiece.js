@@ -32,17 +32,8 @@ export default class GamePiece {
         this.#gamePieceElement.style.setProperty("--y", this.#y);
     }
 
-    set color(color) {
-        this.#color = color;
-        this.#gamePieceElement.style.background = this.#color;
-    }
-
     get color() {
         return this.#color;
-    }
-
-    remove() {
-        this.#gamePieceElement.remove();
     }
 
     waitForTransitionEnd() {
