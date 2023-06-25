@@ -50,7 +50,7 @@ export default class Grid {
     }
 
     gameOver() {
-        if(this.checkForHorizontalWin() || this.checkForVerticalWin() || this.checkForDiagonalWin()) {
+        if(this.#checkForWin(this.#getCellsByRow()) || this.#checkForWin(this.#getCellsByColumns()) || this.checkForDiagonalWin()) {
             return true;
         } else {
             return false;
@@ -58,9 +58,9 @@ export default class Grid {
 
     }
 
-    checkForHorizontalWin() {
+    #checkForWin(cells) {
         let didWin = false;
-        this.#getCellsByRow().forEach((row) => {
+        cells.forEach((row) => {
             for(let i = 0; i < row.length; i++) {
                 let gamePieceOne = row[i].gamePiece;
                 if(gamePieceOne == null) continue;
@@ -80,10 +80,6 @@ export default class Grid {
             }
         })
         return didWin;
-    }
-
-    checkForVerticalWin() {
-
     }
 
     checkForDiagonalWin() {
