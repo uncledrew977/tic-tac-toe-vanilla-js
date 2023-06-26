@@ -6,7 +6,6 @@ export default class Cell {
 
     constructor(cellElement, x, y) {
         this.#cellElement = cellElement;
-        this.#cellElement.innerHTML = `X: ${x} Y: ${y} `
         this.#x = x;
         this.#y = y;
     }
