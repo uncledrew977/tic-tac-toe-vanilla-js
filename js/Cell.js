@@ -1,14 +1,14 @@
-
 export default class Cell {
     #cellElement
     #x
     #y
     #gamePiece
+
     constructor(cellElement, x, y) {
-      this.#cellElement = cellElement;
-      this.#cellElement.innerHTML = `X: ${x} Y: ${y} `
-      this.#x = x;
-      this.#y = y;
+        this.#cellElement = cellElement;
+        this.#cellElement.innerHTML = `X: ${x} Y: ${y} `
+        this.#x = x;
+        this.#y = y;
     }
 
     get x() {

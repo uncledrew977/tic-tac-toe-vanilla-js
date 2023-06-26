@@ -1,9 +1,9 @@
-
 export default class GamePiece {
     #color
     #x
     #y
     #gamePieceElement
+
     constructor(color, gridElement) {
         this.#color = color;
         this.#gamePieceElement = document.createElement("div");
@@ -11,6 +11,10 @@ export default class GamePiece {
         this.#gamePieceElement.style.background = this.#color;
         gridElement.appendChild(this.#gamePieceElement);
 
+    }
+
+    get gamePieceElement() {
+        return this.#gamePieceElement;
     }
 
     get x() {
@@ -24,7 +28,7 @@ export default class GamePiece {
     set x(x) {
         this.#x = x;
         this.#gamePieceElement.style.setProperty("--x", this.#x);
-        this.#gamePieceElement.setAttribute("column",`${this.#x}`);
+        this.#gamePieceElement.setAttribute("column", `${this.#x}`);
     }
 
     set y(y) {
@@ -38,7 +42,13 @@ export default class GamePiece {
 
     waitForTransitionEnd() {
         return new Promise((resolve) => {
-            this.#gamePieceElement.addEventListener("transitionend",resolve,{once: true})
+            this.#gamePieceElement.addEventListener("transitionend", resolve, {once: true})
+        })
+    }
+
+    waitForAnimationEnd() {
+        return new Promise((resolve) => {
+            this.#gamePieceElement.addEventListener("animationend", resolve, {once: true})
         })
     }
 }

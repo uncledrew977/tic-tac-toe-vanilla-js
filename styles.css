@@ -6,6 +6,7 @@ body {
     align-items: center;
     font-size: 20px;
 }
+
 #game-board {
     display: grid;
     background-color: dodgerblue;
@@ -39,4 +40,30 @@ body {
     left: calc(var(--x) * 14vmin + 2vmin);
     top: calc(var(--y) * 14vmin + 3vmin);
     transition: 500ms ease-in-out;
+    backface-visibility: visible !important;
+    animation: flip var(--t) ease;
 }
+
+@keyframes flip {
+    0% {
+        transform: perspective(400px) rotateY(0);
+        animation-timing-function: ease-out;
+    }
+    40% {
+        transform: perspective(400px) translateZ(150px) rotateY(170deg);
+        animation-timing-function: ease-out;
+    }
+    50% {
+        transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+        animation-timing-function: ease-in;
+    }
+    80% {
+        transform: perspective(400px) rotateY(360deg) scale(.95);
+        animation-timing-function: ease-in;
+    }
+    100% {
+        transform: perspective(400px) scale(1);
+        animation-timing-function: ease-in;
+    }
+}
+
