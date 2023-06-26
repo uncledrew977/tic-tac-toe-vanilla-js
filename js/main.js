@@ -10,6 +10,9 @@ gameBoardElement.addEventListener("click", handlePieceDrop, {once: true});
 
 async function handlePieceDrop(e) {
    let clickedColumnNumber = parseInt(e.target.getAttribute("column"));
+   if(isNaN(clickedColumnNumber)) {
+      gameBoardElement.addEventListener("click", handlePieceDrop, {once: true});
+   }
    if(!grid.canPlacePieceInRow(clickedColumnNumber)) return;
    let nextEmptyCell = grid.getNextOpenSpotInColumn(clickedColumnNumber);
    let newPiece = new GamePiece(playerTurnColor,gameBoardElement);
@@ -25,7 +28,7 @@ async function handlePieceDrop(e) {
       gameBoardElement.addEventListener("click", handlePieceDrop, {once: true});
       playerTurnColor = playerTurnColor === "red" ? "blue" : "red";
    } else {
-      alert(`Player ${playerTurnColor === "red" ? "one" : "two"} (${playerTurnColor}) wins!`)
+      alert(`Player ${playerTurnColor === "red" ? "One" : "Two"} (${playerTurnColor}) wins!`)
    }
 
 
