@@ -11,11 +11,12 @@ body {
     background-color: dodgerblue;
     height: 85vmin;
     width: 100vmin;
-    grid-template-columns: Repeat(7, 1fr);
-    grid-template-rows: Repeat(6, 1fr);
+    grid-template-columns: Repeat(7, 12vmin);
+    grid-template-rows: Repeat(6, 12vmin);
     grid-gap: 2vmin;
-    padding: 2vmin;
     position: relative;
+    justify-content: center;
+    padding-top: 3vmin;
 }
 
 .game-cell {
@@ -32,10 +33,10 @@ body {
     --y: 0;
     border-radius: 100%;
     position: absolute;
-    height: 87px;
-    width: 87px;
+    height: 12vmin;
+    width: 12vmin;
     background: white;
-    left: calc(var(--x) * 100px + 14px);
-    top: calc(var(--y) * 100px + 14px);
+    left: calc(var(--x) * 14vmin + 2vmin);
+    top: calc(var(--y) * 14vmin + 3vmin);
     transition: 500ms ease-in-out;
 }
