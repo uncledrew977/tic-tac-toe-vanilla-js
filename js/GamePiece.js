@@ -51,4 +51,5 @@ export default class GamePiece {
             this.#gamePieceElement.addEventListener("animationend", resolve, {once: true})
         })
     }
+
 }

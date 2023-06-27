@@ -1,7 +1,6 @@
 body {
     height: 100vh;
-    background-color: lightgrey;
-    display: flex;
+    background-color: white;
     justify-content: center;
     align-items: center;
     font-size: 20px;
@@ -21,7 +20,7 @@ body {
 }
 
 .game-cell {
-    background-color: lightgrey;
+    background-color: white;
     outline: solid 2px black;
     border-radius: 100%;
     display: flex;
@@ -30,18 +29,62 @@ body {
 }
 
 .game-piece {
-    --x: 0;
-    --y: 0;
     border-radius: 100%;
     position: absolute;
     height: 12vmin;
     width: 12vmin;
-    background: white;
     left: calc(var(--x) * 14vmin + 2vmin);
     top: calc(var(--y) * 14vmin + 3vmin);
-    transition: 500ms ease-in-out;
+    transition: 400ms ease-in-out;
     backface-visibility: visible !important;
     animation: flip var(--t) ease;
+}
+
+#player-indicator-container {
+    height: 40vmin;
+    width: 40vmin;
+    display: flex;
+    flex-direction: column;
+    outline: 5px dashed dodgerblue;
+    margin-left: 10vmin;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    animation: pulse 1s infinite ease-in-out alternate;
+
+}
+
+#player-indicator-h1 {
+    font-size: 5vmin;
+    font-family: sans-serif;
+    color: dodgerblue;
+}
+
+#player-indicator-square {
+    height: 10vmin;
+    width: 10vmin;
+    border-radius: 100%;
+
+}
+
+#game-board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2vmin;
+    height: 10vmin;
+}
+
+#title {
+    font-size: 8vmin;
+    font-family: sans-serif;
+    color: dodgerblue;
 }
 
 @keyframes flip {
@@ -66,4 +109,23 @@ body {
         animation-timing-function: ease-in;
     }
 }
+
+@keyframes pulse {
+    from { transform: scale(0.8); }
+    to { transform: scale(1.2); }
+}
+
+@keyframes flash {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes shake {
+    30% { transform: scale(1.2); }
+    40%, 60% { transform: rotate(-20deg) scale(1.2); }
+    50% { transform: rotate(20deg) scale(1.2); }
+    70% { transform: rotate(0deg) scale(1.2); }
+    100% { transform: scale(1); }
+}
+
 

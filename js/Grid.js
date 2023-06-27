@@ -4,13 +4,16 @@ const MAX_X = 6;
 const MAX_Y = 5;
 export default class Grid {
     #cells
+    #winningGamePieces
 
     constructor(gridElement) {
         this.#cells = createGameBoard(gridElement).map((cellElement, index) => {
             return new Cell(cellElement, index % 7, Math.floor(index / 7))
         })
     }
-
+    get winningGamePieces() {
+        return this.#winningGamePieces;
+    }
     //This function serves to get all cells in a column in reverse order, so we can search in a top-bottom fashion.
     #getAllCellsInAColumn(columnNumber) {
         return [...this.#cells].filter((cell) => {
@@ -59,16 +62,21 @@ export default class Grid {
         let didWin = false;
         cells.forEach((row) => {
             for (let i = 0; i < row.length; i++) {
+                let matchingPieces = [];
                 let gamePieceOne = row[i].gamePiece;
                 if (gamePieceOne == null) continue;
+                matchingPieces.push(gamePieceOne.gamePieceElement);
                 let count = 1;
                 for (let j = i + 1; j < row.length; j++) {
                     let gamePieceTwo = row[j].gamePiece;
                     if (gamePieceTwo == null) break;
                     else if (gamePieceOne.color === gamePieceTwo.color) {
                         count++;
+                        matchingPieces.push(gamePieceTwo.gamePieceElement);
                         if (count === 4) {
                             didWin = true;
+                            this.#winningGamePieces = [...matchingPieces];
+                            break;
                         }
                     } else break;
                 }
@@ -88,6 +96,8 @@ export default class Grid {
                 let cell = row[i];
                 let gamePieceOne = cell.gamePiece;
                 if (gamePieceOne == null) continue;
+                let matchingPieces = [];
+                matchingPieces.push(gamePieceOne.gamePieceElement);
                 let nextX = cell.x + 1;
                 let nextY = cell.y + 1;
                 let count = 1;
@@ -96,8 +106,10 @@ export default class Grid {
                     if (gamePieceTwo == null) break;
                     if (gamePieceTwo.color === gamePieceOne.color) {
                         count++;
+                        matchingPieces.push(gamePieceTwo.gamePieceElement);
                         if (count === 4) {
                             didWin = true;
+                            this.#winningGamePieces = [...matchingPieces];
                             break;
                         }
                         nextX++;
